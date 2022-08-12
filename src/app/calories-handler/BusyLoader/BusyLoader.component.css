@@ -8,7 +8,5 @@
 
 .busy-loader-text {
     position: absolute;
-    top: 50%;
-    left: 35%;
     font-size: xx-large;
 }
