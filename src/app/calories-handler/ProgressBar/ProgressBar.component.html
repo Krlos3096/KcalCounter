@@ -1,0 +1,5 @@
+<mat-toolbar>
+  {{eatenCalories}}kcal
+  <mat-progress-bar mode="determinate" [value]="eatenCalories/limitCalories*100"></mat-progress-bar>
+  {{limitCalories}}kcal
+</mat-toolbar>
