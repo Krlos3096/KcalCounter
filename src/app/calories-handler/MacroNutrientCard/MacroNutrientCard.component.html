@@ -1,0 +1,9 @@
+<mat-card>
+  <mat-card-title>{{title}}</mat-card-title>
+  <img class="icon" *ngIf="image" [src]="image" [alt]="alt"/>
+  <mat-card-actions>
+    <button mat-button (click)="countChangeHandler(-1)">-</button>
+    <button mat-button (click)="countChangeHandler(1)">+</button>
+    <span>{{count}}</span>
+  </mat-card-actions>
+</mat-card>
