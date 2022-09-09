@@ -1,14 +1,16 @@
-nav {
-    height: 10%;
+.sidenav-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 
-.gridPanel {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(4, 1fr);
-    height: 80%;
+nav span {
+    left: 44%;
+    position: absolute;
 }
 
-footer {
-    height: 10%;
+a {
+    color: black;
 }

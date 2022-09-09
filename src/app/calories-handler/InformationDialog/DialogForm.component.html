@@ -1,11 +1,20 @@
-<h1 mat-dialog-title>Hola! {{data.name}}</h1>
+<h1 mat-dialog-title>Hola! {{contactForm.value.name}}</h1>
 <div mat-dialog-content>
-  <p>Debes ingresar un nombre</p>
-  <mat-form-field appearance="fill">
-    <mat-label>Nombre</mat-label>
-    <input matInput [(ngModel)]="data.name">
-  </mat-form-field>
+  <p>Ingresa tus datos</p>
+  <br>
+  <form [formGroup]="contactForm">
+    <label for="name" class="form-label">Nombre completo</label>
+    <input id="name" class="form-control" name="name" type="text" minlength="3" required formControlName="name" />
+    <p *ngIf="contactForm.get('name')?.touched && contactForm.get('name')?.errors?.['required']" class="alert alert-danger mt-1">Este campo es requerido</p>
+    <p *ngIf="contactForm.get('name')?.touched && contactForm.get('name')?.errors?.['minlength']" class="alert alert-danger mt-1">Este campo debe tener al menos 3 caracteres</p>
+    <label for="age" class="form-label">Edad</label>
+    <input id="age" class="form-control" name="age" type="number" required formControlName="age" />
+    <p *ngIf="contactForm.get('age')?.touched && contactForm.get('age')?.errors?.['required']" class="alert alert-danger mt-1">Este campo es requerido</p>
+    <label for="weight" class="form-label">Peso(Kg)</label>
+    <input id="weight" class="form-control" name="weight" type="number" required formControlName="weight" />
+    <p *ngIf="contactForm.get('weight')?.touched && contactForm.get('weight')?.errors?.['required']" class="alert alert-danger mt-1">Este campo es requerido</p>
+  </form>
 </div>
 <div mat-dialog-actions>
-  <button mat-button [mat-dialog-close]="data.name" cdkFocusInitial [disabled]="data.name == ''">Ingresar</button>
+  <button mat-button [mat-dialog-close]="contactForm.value" cdkFocusInitial [disabled]="!contactForm.valid">Ingresar</button>
 </div>
