@@ -1,3 +1,7 @@
 .icon {
-    height: 10vh;
+    height: 60%;
+}
+
+mat-card {
+    height: 100%;
 }

@@ -1,15 +1,6 @@
 import {Component, OnInit, Inject} from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {MatDialog, MatDialogRef,MAT_DIALOG_DATA} from '@angular/material/dialog';
-
-/**
- * Data for the Dialog that will 
- *
- * @export
- * @interface DialogData
- */
-export interface DialogData {
-  name: string;
-}
 
 /**
  * Dialog component that will display the form that asks for the name of the user
@@ -47,7 +38,9 @@ export class InformationDialogComponent implements OnInit {
 
       dialogRef.disableClose = true;
       dialogRef.afterClosed().subscribe(result => {
-        window.localStorage.setItem('name',result);
+        window.localStorage.setItem('name',result.name);
+        window.localStorage.setItem('age',result.age);
+        window.localStorage.setItem('weight',result.weight);
       });
     }
   }
@@ -63,7 +56,15 @@ export class InformationDialogComponent implements OnInit {
   selector: 'dialog-form',
   templateUrl: 'DialogForm.component.html',
 })
-export class DialogForm {
+export class DialogForm implements OnInit {
+
+  /**
+   * FormGroup property for the form control that will use it to validate the fields
+   *
+   * @type {FormGroup}
+   * @memberof DialogForm
+   */
+  contactForm! : FormGroup
 
   /**
    * Creates an instance of DialogForm.
@@ -73,6 +74,24 @@ export class DialogForm {
    */
   constructor(
     public dialogRef: MatDialogRef<InformationDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData
+    private readonly formBuilder : FormBuilder
   ) {}
+
+  ngOnInit(): void {
+    this.contactForm = this.initForm();
+  }
+
+  /**
+   * Initialize the formgroup property so the form can validate the fields
+   *
+   * @return {*}  {FormGroup}
+   * @memberof DialogForm
+   */
+  initForm() : FormGroup{
+    return this.formBuilder.group({
+      name: ['',[Validators.required, Validators.minLength(3)]],
+      age: ['',[Validators.required]],
+      weight: ['',[Validators.required]],
+    })
+  }
 }
