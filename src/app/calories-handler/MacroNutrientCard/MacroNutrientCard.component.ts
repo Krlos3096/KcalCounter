@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { CaloriesCalculatorService} from '../services/CaloriesCalculator.service'
 
 /**
@@ -49,6 +50,21 @@ export class MacroNutrientCardComponent implements OnInit {
   consumedCalories = 0;
 
   /**
+   * Subscription for the observable of the over limited 
+   *
+   * @type {Subscription}
+   * @memberof MacroNutrientCardComponent
+   */
+  public subscription: Subscription = new Subscription;
+
+  /**
+   * Flag that will set the class for the respective case where the calories are overlimited
+   *
+   * @memberof MacroNutrientCardComponent
+   */
+  classOverLimited = false
+
+  /**
    * Title that will display the respective name of the macronutrient
    *
    * @memberof MacroNutrientCardComponent
@@ -85,6 +101,10 @@ export class MacroNutrientCardComponent implements OnInit {
    */
   ngOnInit() {
     this.calculatorService.macroNutrients.push(this);
+    this.subscription = this.calculatorService.subjectObservable.subscribe(
+      (overLimited: boolean) => {
+        this.classOverLimited = overLimited;
+      } );
   }
 
   /**

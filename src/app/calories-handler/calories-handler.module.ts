@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { CaloriesHandlerRoutingModule } from './calories-handler-routing.module';
 // Components Imports
 import { BusyLoaderComponent } from './BusyLoader/BusyLoader.component';
 import { InformationDialogComponent, DialogForm } from './InformationDialog/InformationDialog.component';
@@ -28,6 +29,7 @@ import { MatButtonModule } from '@angular/material/button';
     HomeComponent
   ],
   imports: [
+    CaloriesHandlerRoutingModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
