@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card [ngClass]="{'classOverLimited': classOverLimited}">
   <mat-card-title>{{title}}</mat-card-title>
   <img class="icon" *ngIf="image" [src]="image" [alt]="alt"/>
   <mat-card-actions>
